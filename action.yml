@@ -13,13 +13,18 @@ inputs:
     description: 'alert level (INFO, WARN, FATAL)'
     required: false
     default: 'WARN'
+  others:
+    description: 'other options example: -i DKL-DI-0001'
+    required: false
+    default: '--ignore=""' # need to any options
 runs:
   using: 'docker'
   image: 'docker://goodwithtech/dockle:latest'
   args:
     - '--exit-code=${{ inputs.exit-code }}'
     - '--exit-level=${{ inputs.exit-level }}'
-    - '${{ inputs.image }}'
+    - '${{ inputs.others}}'
+    - ${{ inputs.image }}
 branding:
   icon: 'search'
   color: 'green'
